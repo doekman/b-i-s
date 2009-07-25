@@ -1,0 +1,1 @@
+This is a new file in a new subdirectory. Subdirectories should automatically be created, when the do not exist. This is from example 4_newsubdir.

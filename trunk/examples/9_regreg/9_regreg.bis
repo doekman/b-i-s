@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<bis id="9_regreg" description="Multiple registry tests">
+	<rollback-base>.</rollback-base>
+	<registry>
+		<file>sz.reg</file>
+		<file>strange.reg</file>
+		<file>dword.reg</file>
+	</registry>
+</bis>

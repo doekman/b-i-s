@@ -1,0 +1,6 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Cats Deep\8_reg]
+@="way cool"
+"version"="0.8.0"
+

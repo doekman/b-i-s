@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<bis id="2_dll">
+	<update>
+		<from-base>updates</from-base>
+		<to-base>toBase</to-base>
+	</update>
+	<rollback-base>.</rollback-base>
+	<run-before>
+		<cmd>net stop iisadmin /y</cmd>
+		<!--stop IIS-->
+	</run-before>
+	<run-after>
+		<cmd>net start w3svc</cmd>
+		<!--start IIS again, assume only the webserver was started-->
+	</run-after>
+</bis>

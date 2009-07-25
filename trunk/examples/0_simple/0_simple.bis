@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<bis id="0_simple">
+	<update>
+		<from-base>updates</from-base>
+		<to-base>toBase</to-base>
+	</update>
+	<rollback-base>.</rollback-base>
+</bis>

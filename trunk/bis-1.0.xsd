@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by frank (frank inc.) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="bis">
+		<xs:annotation>
+			<xs:documentation>version attribute should be 1.0. id attribute should identify this installation, and is required.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="update" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="rollback-base"/>
+				<xs:element name="registry" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Optional registry files to merge into the registry (with regedit.exe). One overall uninstall merge file will be generated and be scheduled in uninstall.bat</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence maxOccurs="unbounded">
+							<xs:element name="file">
+								<xs:annotation>
+									<xs:documentation>Just the filename. Don't put the registry file in the from/to base, but put it in the same directory as this bis file.</xs:documentation>
+									<xs:documentation>Just the filename. Don't put the registry file in the from/to base, but put it in the same directory as this bis file.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="run-before" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Runs before installation or un-installation starts. DOS commands that are run before the installer and uninstaller batch files are copying/moving/deleting. Use this for stopping and starting processes/services who might lock the files to be updated. To stop IIS locking dll files: "net stop iisadmin /y"</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="cmd" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="run-after" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Runs when installation or un-installation has completed. Start the processes/services that are stopped in the run-before tag. For example "net start w3svc" (web-service), "net start ftp" (ftp-service).</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="cmd" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="run-before-install" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Runs only before installation starts</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="cmd" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="run-after-install" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Runs after the installation</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="cmd" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="run-before-uninstall" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Runs before the un-installation starts</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="cmd" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="run-after-uninstall" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Runs when the un-installation is done</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="cmd" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:string" use="required"/>
+			<xs:attribute name="description" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cmd">
+		<xs:annotation>
+			<xs:documentation>Default, an check on errorlevel is done after running a command. To disable this, add the attribute errorlevel-check="false"</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="errorlevel-check" type="xs:boolean" use="optional" default="true"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="from-base" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Absolute or relative (relative to current directory) directory of the source files.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="rollback-base" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The location where the uninstall-directories are located. At this location, a folder is created with the name bisID, where ID is the value, specified in the id attribute of the update element. When omitted, the current directory is used</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="to-base" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Absolute or relative (relative to current directory) direcotry of the destination of the files</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="update">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="from-base"/>
+				<xs:element ref="to-base"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

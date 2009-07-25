@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<bis id="7_multi_update" description="multi-target-test">
+	<update>
+		<from-base>updates</from-base>
+		<to-base>toBase</to-base>
+	</update>
+	<update>
+		<from-base>updates2</from-base>
+		<to-base>toBase2</to-base>
+	</update>
+	<rollback-base>.</rollback-base>
+</bis>
