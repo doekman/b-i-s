@@ -3,7 +3,7 @@
 
 = Quick start =
 To create a package to update your server installation, perform the following steps:
-   * gather the new and updated files and put them in the same directoy structure as the are on the server (as long as the relative paths are the same)
+  * gather the new and updated files and put them in the same directoy structure as the are on the server (as long as the relative paths are the same)
   * create a BIS command file. This file contains the from, to and uninstall directories.
   * include the `bis.js` script in this package
   * put everything in a zip-file or SFX
