@@ -1,0 +1,1 @@
+This is a new file in a subdirectory. This is from example 3_subdirs.

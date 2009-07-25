@@ -1,0 +1,1 @@
+Only this folder (and not "sub\") is expired. This readme.txt is backuped as well

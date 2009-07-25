@@ -1,0 +1,1 @@
+Remove from sub-directories. See example 3_subdir.
