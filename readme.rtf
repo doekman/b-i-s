@@ -1,87 +1,222 @@
-{\rtf1\ansi\ansicpg1252\deff0\deflang1043{\fonttbl{\f0\fswiss\fcharset0 Arial;}{\f1\fmodern\fprq1\fcharset0 Courier New;}{\f2\fswiss\fprq2\fcharset0 Arial;}{\f3\fnil\fcharset2 Symbol;}}
-{\colortbl ;\red128\green128\blue128;}
-\viewkind4\uc1\pard\qc\b\f0\fs20 Barebone Installation System (BIS)\par
-\b0\i by Cats Deep\par
-\i0 www.catsdeep.com\par
-\pard\par
-\b What is BIS\b0\par
-With BIS, you quickly create an setup, to install new and modified files, and optionally remove expired files. BIS is most useful if you need to update a server-side installation of your software. It needs minimal setup, and still creates an uninstaller. And most importantly, you don't need to alter your script, when you last-minute need to add a file to the installer.\par
-\par
-For more information, see the file \b Guide.rtf\b0 .\par
-\par
-\b Revision history\b0\par
-\i Version 0.8.2 [2004-10-21]\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284\i0 Progress is now shown by writing the same to the screen as to the log\i\par
-\i0{\pntext\f3\'B7\tab}All copy and del commands have been replaced by move. After installing, the from-base directory is emptied now (with the exception of bis-delete files and all folders)\i\par
-\pard Version 0.8.1 [2004-10-17]\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284\i0 Fixed a problem with dword export (a 0x prefix before the value was written)\i\par
-\i0{\pntext\f3\'B7\tab}Fixed behaviour of clean.bat (the registry files were deleted, now they are renamed back)\i\par
-\i0{\pntext\f3\'B7\tab}Added wrapping for hex-strings in the antireg file.\i\par
-\i0{\pntext\f3\'B7\tab}When a key-delete is specified in the uninstaller, no (unneccesary) name/value deletion is specified anymore.\i\par
-\i0{\pntext\f3\'B7\tab}Made the update tag optional, so you can also distribute registry files, without distributing files...\i\par
-\i0{\pntext\f3\'B7\tab}An uninstaller is added.\i\par
-\pard Version 0.8.0 [2004-10-16]\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284\i0 Now it is possible to install one or more registry files declaritive. If registry files are specified (with the registry/file tag), an undo file is automatically generated! See the description in Guide.rtf. \i\par
-\i0{\pntext\f3\'B7\tab}Feature freeze. No more features will be added. After testing, this will become the final 1.0 version.\i\par
-\pard Version 0.7.4 [2004-10-14]\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284\i0 Added support for run-before-install, run-after-install, run-before-uninstall and run-after-uninstall "events" as addition to run-before and run-after which doesn't make destinction between installation and uninstallation (4 extra tags, hence the .4 in the version number).\par
-\pard\i Version 0.7 [2004-10-06]\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284\i0 Added support for multiple from/to directory pairs within one bis-file\par
-{\pntext\f3\'B7\tab}Reworked file-format (dropped \f1 bis/@version\f0 , moved \f1 @id\f0  and \f1 @description\f0  to \f1 bis\f0 -tag, moved all tags within \f1 update\f0  to \f1 bis \f0 tag, so update tag is can be used for multiple from/to pairs.\par
-\pard\i Version 0.6 [2004-09-18]\i0\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284 Files can now be removed by creating a marker file with the extension .bis-delete (to remove toBase\\file.txt create a markerfile updates\\file.txt.bis-delete). Works for folders as well. The remove/file tag is removed from the implementation.\par
-{\pntext\f3\'B7\tab}Better logging. The command itself is now written to the log-file too.\par
-{\pntext\f3\'B7\tab}New examples. Examples are also tested by a system-test, to ensure correct behaviour.\par
-\pard\i Version 0.5 [2004-09-08]\i0\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284 New sub-directories are now created/removed by the installer/uninstaller.\par
-{\pntext\f3\'B7\tab}A \f1 clean.bat \f0 file is generated, which removes any generated files\par
-\pard\i Version 0.4.2 [2004-09-08]\i0\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284 Added standard errorchecking code on <cmd> tags, can be disabled with the errorlevel-check="false" attribute.\par
-\pard\i Version 0.4.1 [2004-09-01]\i0\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284 If the rollback-base directory doesn't exist, it will be created automatically\par
-\pard\i Version 0.4 [2004-08-31]\i0\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284 Added logging to the batch-files\par
-{\pntext\f3\'B7\tab}Changed installed detection\par
-{\pntext\f3\'B7\tab}Added icon\par
-\pard\i Version 0.3 [2004-08-24]\i0\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284 Initial version, beta.\par
-\pard\par
-\b Installation\b0\par
-BIS is redistributed as ZIP-file and as SFX (self extracting executable). The SFX does all the installation work for you. If you got the ZIP-file: put the included files anyware you like, and run \f1 cscript bis.js -r\f0  to associate the .bis extension with the (instance) of the installed script (the exe-version of ).\par
-\par
-\b Removal\b0\par
-Run \f1 cscript bis.js -r-\f0  and remove the supplied files. Also remove the \f1 Barebone Installation System\f0  folder from the Start menu, if you used the SFX installer.\par
-\par
-\b System requirements\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284\cf1\f2 WSH\cf0\b0\f0 : You'll need Windows with WSH (Windows Scripting Host) build in. This means it runs natively on Windows 98, 2000 and up (including Me, XP, 2003). For Windows 95 and Windows NT 4, you'll probably need to install WSH (just check under the command prompt if the command \f1 cscript\f0  is availble), which is available at http://msdn.microsoft.com/scripting.\par
-\cf1\b{\pntext\f3\'B7\tab}MSXML\cf0\b0 : You'll need version 3.0 or up, which is available at http://msdn.microsoft.com/XML/XMLDownloads/. To use the scheme validation, you'll need version 4.0.\par
-\pard\par
-\b License\b0\par
-\f2 This software is distributed via a BSD style license. Basically this means you can do anything with it, but leave the copyright notice intact. For the exact and normative definition, see the file \f1 license.txt\f2 .\f0\par
-\par
-\b Feedback\b0\par
-Please send your comments and bugs to d.zanstra@catsdeep.com with the subject BIS comments. With bugs, please include the version of the script, as printed on the first line when executing.\par
-\par
-\b To do for 1.0\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284\b0 Create test-cases for command-line options. \par
-{\pntext\f3\'B7\tab}Fix the no-log option (or remove it?)\par
-{\pntext\f3\'B7\tab}Some more type test for 9_regreg\par
-\pard\b To do fo 1.1\b0\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284 Do something for files that are in use in-use:\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li568 detect: http://www.swapcode.com/domdoc/page/lscode003.html\par
-{\pntext\f3\'B7\tab}handle: http://www.sysinternals.com/ntw2k/source/misc.shtml#pendmoves\par
-{\pntext\f3\'B7\tab}research: is it possible to detect which processes lock a file, and possibly to shut them down (IIS unload)\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284 If install failes on some entries, a re-run of the install should be possible after fixing stuff (remove readonly, kill a proces). Or is this 2.0?\par
-{\pntext\f3\'B7\tab}Write .bis file editor: hta?\par
-\pard\b To do fo 2.0\b0\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284 Rewrite as exe in C++ or C#. Why:\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li568 complete support for antireg\par
-\pard\b To do\b0\par
-\pard{\pntext\f3\'B7\tab}{\*\pn\pnlvlblt\pnf3\pnindent0{\pntxtb\'B7}}\fi-284\li284 Design a proper product/research page\par
-{\pntext\f3\'B7\tab}Add more faq items\par
-{\pntext\f3\'B7\tab}...\par
-\pard\qc\par
-\cf1\b\f1\fs18 file: readme.rtf\par
-\pard\cf0\b0\f0\fs20\par
+{\rtf1\ansi\ansicpg1252\cocoartf949\cocoasubrtf460
+{\fonttbl\f0\fswiss\fcharset0 ArialMT;\f1\fmodern\fcharset0 CourierNewPSMT;\f2\fmodern\fcharset0 CourierNewPS-BoldMT;
 }
- 
+{\colortbl;\red255\green255\blue255;\red128\green128\blue128;}
+\vieww27420\viewh19200\viewkind0
+\deftab720
+\pard\pardeftab720\qc
+
+\f0\b\fs20 \cf0 Barebone Installation System (BIS)\
+
+\i\b0 by Cats Deep\
+
+\i0 www.catsdeep.com\
+Added to google code 2009-07-25\
+http://code.google.com/p/b-i-s/\
+\pard\pardeftab720\ql\qnatural
+\cf0 \
+
+\b What is BIS
+\b0 \
+With BIS, you quickly create an setup, to install new and modified files, and optionally remove expired files. BIS is most useful if you need to update a server-side installation of your software. It needs minimal setup, and still creates an uninstaller. And most importantly, you don't need to alter your script, when you last-minute need to add a file to the installer.\
+\
+For more information, see the file 
+\b Guide.rtf
+\b0 .\
+\
+
+\b Revision history
+\b0 \
+
+\i Version 0.8.2 [2004-10-21]\
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+
+\i0 \cf0 Progress is now shown by writing the same to the screen as to the log
+\i \
+
+\i0 All copy and del commands have been replaced by move. After installing, the from-base directory is emptied now (with the exception of bis-delete files and all folders)
+\i \
+\pard\pardeftab720\ql\qnatural
+\cf0 Version 0.8.1 [2004-10-17]\
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+
+\i0 \cf0 Fixed a problem with dword export (a 0x prefix before the value was written)
+\i \
+
+\i0 Fixed behaviour of clean.bat (the registry files were deleted, now they are renamed back)
+\i \
+
+\i0 Added wrapping for hex-strings in the antireg file.
+\i \
+
+\i0 When a key-delete is specified in the uninstaller, no (unneccesary) name/value deletion is specified anymore.
+\i \
+
+\i0 Made the update tag optional, so you can also distribute registry files, without distributing files...
+\i \
+
+\i0 An uninstaller is added.
+\i \
+\pard\pardeftab720\ql\qnatural
+\cf0 Version 0.8.0 [2004-10-16]\
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+
+\i0 \cf0 Now it is possible to install one or more registry files declaritive. If registry files are specified (with the registry/file tag), an undo file is automatically generated! See the description in Guide.rtf. 
+\i \
+
+\i0 Feature freeze. No more features will be added. After testing, this will become the final 1.0 version.
+\i \
+\pard\pardeftab720\ql\qnatural
+\cf0 Version 0.7.4 [2004-10-14]\
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+
+\i0 \cf0 Added support for run-before-install, run-after-install, run-before-uninstall and run-after-uninstall "events" as addition to run-before and run-after which doesn't make destinction between installation and uninstallation (4 extra tags, hence the .4 in the version number).\
+\pard\pardeftab720\ql\qnatural
+
+\i \cf0 Version 0.7 [2004-10-06]\
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+
+\i0 \cf0 Added support for multiple from/to directory pairs within one bis-file\
+Reworked file-format (dropped 
+\f1 bis/@version
+\f0 , moved 
+\f1 @id
+\f0  and 
+\f1 @description
+\f0  to 
+\f1 bis
+\f0 -tag, moved all tags within 
+\f1 update
+\f0  to 
+\f1 bis 
+\f0 tag, so update tag is can be used for multiple from/to pairs.\
+\pard\pardeftab720\ql\qnatural
+
+\i \cf0 Version 0.6 [2004-09-18]
+\i0 \
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+\cf0 Files can now be removed by creating a marker file with the extension .bis-delete (to remove toBase\\file.txt create a markerfile updates\\file.txt.bis-delete). Works for folders as well. The remove/file tag is removed from the implementation.\
+Better logging. The command itself is now written to the log-file too.\
+New examples. Examples are also tested by a system-test, to ensure correct behaviour.\
+\pard\pardeftab720\ql\qnatural
+
+\i \cf0 Version 0.5 [2004-09-08]
+\i0 \
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+\cf0 New sub-directories are now created/removed by the installer/uninstaller.\
+A 
+\f1 clean.bat 
+\f0 file is generated, which removes any generated files\
+\pard\pardeftab720\ql\qnatural
+
+\i \cf0 Version 0.4.2 [2004-09-08]
+\i0 \
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+\cf0 Added standard errorchecking code on <cmd> tags, can be disabled with the errorlevel-check="false" attribute.\
+\pard\pardeftab720\ql\qnatural
+
+\i \cf0 Version 0.4.1 [2004-09-01]
+\i0 \
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+\cf0 If the rollback-base directory doesn't exist, it will be created automatically\
+\pard\pardeftab720\ql\qnatural
+
+\i \cf0 Version 0.4 [2004-08-31]
+\i0 \
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+\cf0 Added logging to the batch-files\
+Changed installed detection\
+Added icon\
+\pard\pardeftab720\ql\qnatural
+
+\i \cf0 Version 0.3 [2004-08-24]
+\i0 \
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+\cf0 Initial version, beta.\
+\pard\pardeftab720\ql\qnatural
+\cf0 \
+
+\b Installation
+\b0 \
+BIS is redistributed as ZIP-file and as SFX (self extracting executable). The SFX does all the installation work for you. If you got the ZIP-file: put the included files anyware you like, and run 
+\f1 cscript bis.js -r
+\f0  to associate the .bis extension with the (instance) of the installed script (the exe-version of ).\
+\
+
+\b Removal
+\b0 \
+Run 
+\f1 cscript bis.js -r-
+\f0  and remove the supplied files. Also remove the 
+\f1 Barebone Installation System
+\f0  folder from the Start menu, if you used the SFX installer.\
+\
+
+\b System requirements\
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+\cf2 WSH
+\b0 \cf0 : You'll need Windows with WSH (Windows Scripting Host) build in. This means it runs natively on Windows 98, 2000 and up (including Me, XP, 2003). For Windows 95 and Windows NT 4, you'll probably need to install WSH (just check under the command prompt if the command 
+\f1 cscript
+\f0  is availble), which is available at http://msdn.microsoft.com/scripting.\
+
+\b \cf2 MSXML
+\b0 \cf0 : You'll need version 3.0 or up, which is available at http://msdn.microsoft.com/XML/XMLDownloads/. To use the scheme validation, you'll need version 4.0.\
+\pard\pardeftab720\ql\qnatural
+\cf0 \
+
+\b License
+\b0 \
+This software is distributed via a BSD style license. Basically this means you can do anything with it, but leave the copyright notice intact. For the exact and normative definition, see the file 
+\f1 license.txt
+\f0 .\
+\
+
+\b Feedback
+\b0 \
+Please send your comments and bugs to d.zanstra@catsdeep.com with the subject BIS comments. With bugs, please include the version of the script, as printed on the first line when executing.\
+\
+
+\b To do for 1.0\
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+
+\b0 \cf0 Create test-cases for command-line options. \
+Fix the no-log option (or remove it?)\
+Some more type test for 9_regreg\
+\pard\pardeftab720\ql\qnatural
+
+\b \cf0 To do fo 1.1
+\b0 \
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+\cf0 Do something for files that are in use in-use:\
+\pard\pardeftab720\li568\fi-284\ql\qnatural
+\cf0 detect: http://www.swapcode.com/domdoc/page/lscode003.html\
+handle: http://www.sysinternals.com/ntw2k/source/misc.shtml#pendmoves\
+research: is it possible to detect which processes lock a file, and possibly to shut them down (IIS unload)\
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+\cf0 If install failes on some entries, a re-run of the install should be possible after fixing stuff (remove readonly, kill a proces). Or is this 2.0?\
+Write .bis file editor: hta?\
+\pard\pardeftab720\ql\qnatural
+
+\b \cf0 To do fo 2.0
+\b0 \
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+\cf0 Rewrite as exe in C++ or C#. Why:\
+\pard\pardeftab720\li568\fi-284\ql\qnatural
+\cf0 complete support for antireg\
+\pard\pardeftab720\ql\qnatural
+
+\b \cf0 To do
+\b0 \
+\pard\pardeftab720\li284\fi-284\ql\qnatural
+\cf0 Design a proper product/research page\
+Add more faq items\
+...\
+\pard\pardeftab720\qc
+\cf0 \
+\pard\pardeftab720\qc
+
+\f2\b\fs18 \cf2 file: readme.rtf\
+\pard\pardeftab720\ql\qnatural
+
+\f0\b0\fs20 \cf0 \
+}
